@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+            max-width: 400px;
+        }
+        #results {
+            margin-top: 20px;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>SEO Analyzer Tool</h1>
+    <input type="text" id="url" placeholder="Enter website URL">
+    <button onclick="analyzeSEO()">Analyze</button>
+    <div id="results"></div>
+    
+    <script>
+        function analyzeSEO() {
+            const url = document.getElementById('url').value;
+            const results = document.getElementById('results');
+            results.innerHTML = "";
+            
+            if (!url) {
+                results.innerHTML = "<p style='color: red;'>Please enter a valid URL</p>";
+                return;
+            }
+            
+            let recommendations = [];
+            
+            if (!url.startsWith('https://')) {
+                recommendations.push("Consider using HTTPS for security and SEO ranking.");
+            }
+            if (!url.includes('www')) {
+                recommendations.push("Ensure your site is accessible with and without 'www'.");
+            }
+            recommendations.push("Optimize images with alt text.", "Use proper heading tags (H1, H2, H3) for better readability.", "Improve page speed for better user experience.", "Include meta descriptions and title tags.");
+            
+            results.innerHTML = `<h3>SEO Analysis for ${url}</h3><ul>` + recommendations.map(item => `<li>${item}</li>`).join('') + `</ul>`;
+        }
+    </script>
+</body>
+</html>
